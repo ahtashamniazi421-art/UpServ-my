@@ -350,9 +350,10 @@
         /* --- Portfolio/Industry Cards — Glassmorphism --- */
         #portfolio { background: #05070A !important; border-color: #1a2030 !important; }
         .portfolio-card {
-            background: rgba(10, 14, 20, 0.7) !important;
+            background: rgba(15, 20, 30, 0.9) !important;
             backdrop-filter: blur(16px) !important;
-            border-color: #1a2030 !important;
+            border-right: 2px solid #1a2030 !important;
+            border-top: 1px solid rgba(0,212,255,0.08) !important;
         }
         .portfolio-card h3 { color: #e0e6ed !important; }
         .portfolio-card p { color: #8a95a5 !important; }
@@ -360,9 +361,9 @@
         .portfolio-card .text-brand-coral { color: #00D4FF !important; }
         .portfolio-card .border-brand-dark { border-color: #1a2030 !important; }
         .portfolio-card svg { color: #00D4FF !important; }
-        .portfolio-card .w-14 { border-color: #1a2030 !important; }
+        .portfolio-card .w-14 { border-color: rgba(0,212,255,0.25) !important; }
         .portfolio-card:hover {
-            background: rgba(0, 212, 255, 0.06) !important;
+            background: rgba(0, 212, 255, 0.08) !important;
             border-color: rgba(0, 212, 255, 0.3) !important;
         }
         .portfolio-card:hover h3,
@@ -370,6 +371,7 @@
         .portfolio-card:hover span { color: #e0e6ed !important; }
         .portfolio-card .group-hover\:border-white\/40 { border-color: rgba(0,212,255,0.2) !important; }
         .portfolio-scroll-wrapper { border-color: #1a2030 !important; }
+        .portfolio-scroll-track { min-height: 500px; }
         .portfolio-nav-btn {
             border-color: #1a2030 !important;
             background: #0a0e14 !important;
@@ -3100,13 +3102,15 @@
     (function() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
         gsap.registerPlugin(ScrollTrigger);
-        var reveals = document.querySelectorAll('#pricing, #portfolio, #faq, #blog, #ai-audit-tool, #how-it-works');
+        var reveals = document.querySelectorAll('#pricing, #faq, #blog, #ai-audit-tool, #how-it-works');
         reveals.forEach(function(sec) {
-            var els = sec.querySelectorAll('h2, h3, p, article, .portfolio-card, .faq-trigger, [class*="border-2"]');
-            gsap.from(els, {
-                y: 40, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out',
-                scrollTrigger: { trigger: sec, start: 'top 85%', toggleActions: 'play none none none' }
-            });
+            var els = sec.querySelectorAll(':scope > div > h2, :scope > div > p, :scope > div > div');
+            if (els.length) {
+                gsap.from(els, {
+                    y: 30, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+                    scrollTrigger: { trigger: sec, start: 'top 85%', toggleActions: 'play none none none' }
+                });
+            }
         });
     })();
     </script>
