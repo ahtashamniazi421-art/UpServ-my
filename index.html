@@ -486,6 +486,34 @@
             stroke: white;
             stroke-width: 2.5;
         }
+        .portfolio-demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: #ff6b4a;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+            border: 2px solid #ff6b4a;
+            transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .portfolio-demo-btn:hover {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,74,0.3);
+        }
+        .portfolio-demo-btn:active {
+            transform: translateY(0);
+        }
         .portfolio-blurred {
             filter: blur(8px) brightness(0.5);
             transition: filter 0.4s ease;
@@ -879,6 +907,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-white group hover:bg-brand-coral transition-colors duration-300 cursor-pointer"
             data-industry="health"
+            data-demo="https://upserv-dental.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -913,6 +942,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-brand-lilac/30 group hover:bg-brand-dark transition-colors duration-300 cursor-pointer"
             data-industry="legal"
+            data-demo="https://upserv-lawfirm.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -942,6 +972,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-white group hover:bg-brand-lilac transition-colors duration-300 cursor-pointer"
             data-industry="property"
+            data-demo="https://upserv-realestate.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -971,6 +1002,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-brand-coral group hover:bg-brand-dark transition-colors duration-300 cursor-pointer"
             data-industry="food"
+            data-demo="https://upserv-restaurant.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1000,6 +1032,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-white group hover:bg-brand-pink transition-colors duration-300 cursor-pointer"
             data-industry="health"
+            data-demo="https://upserv-medical.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1029,6 +1062,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-brand-dark group hover:bg-brand-lilac transition-colors duration-300 cursor-pointer"
             data-industry="retail"
+            data-demo="https://upserv-retail.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1058,6 +1092,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-white group hover:bg-brand-dark transition-colors duration-300 cursor-pointer"
             data-industry="service"
+            data-demo="https://upserv-homeservices.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1087,6 +1122,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-brand-lilac/40 group hover:bg-brand-coral transition-colors duration-300 cursor-pointer"
             data-industry="service"
+            data-demo="https://upserv-accounting.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1116,6 +1152,7 @@
           <article
             class="portfolio-card flex-shrink-0 w-[400px] md:w-[440px] border-r-2 border-brand-dark bg-white group hover:bg-brand-pink transition-colors duration-300 cursor-pointer"
             data-industry="service"
+            data-demo="https://upserv-salon.vercel.app"
             itemscope itemtype="https://schema.org/CreativeWork"
           >
             <div class="p-8 md:p-10 h-full flex flex-col">
@@ -1334,6 +1371,22 @@
               zoomedClone.style.top = rect.top + 'px';
               zoomedClone.style.width = rect.width + 'px';
               zoomedClone.style.height = rect.height + 'px';
+
+              // Inject "View Example" button into the zoomed card
+              var demoUrl = card.getAttribute('data-demo');
+              if (demoUrl) {
+                var innerDiv = zoomedClone.querySelector('.p-8, .p-10, [class*="p-8"]');
+                if (innerDiv) {
+                  var demoBtn = document.createElement('a');
+                  demoBtn.href = demoUrl;
+                  demoBtn.target = '_blank';
+                  demoBtn.rel = 'noopener noreferrer';
+                  demoBtn.className = 'portfolio-demo-btn';
+                  demoBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg> View Example Website';
+                  demoBtn.addEventListener('click', function(ev) { ev.stopPropagation(); });
+                  innerDiv.appendChild(demoBtn);
+                }
+              }
 
               overlay.appendChild(zoomedClone);
               overlay.classList.add('active');
