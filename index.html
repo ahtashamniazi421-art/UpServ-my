@@ -2660,8 +2660,8 @@
         nodeEls.forEach(function(node, i) {
             // Add title label overlay
             var lbl = document.createElement('div');
-            lbl.style.cssText = 'position:absolute;top:8px;left:14px;right:14px;z-index:31;pointer-events:none;';
-            lbl.innerHTML = '<span style="font-family:\'Outfit\',sans-serif;font-size:11px;font-weight:800;color:#ff6b4a;text-transform:uppercase;letter-spacing:0.12em;text-shadow:0 0 12px rgba(255,107,74,0.3);">' + heroData[i].title + '</span>';
+            lbl.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:31;pointer-events:none;';
+            lbl.innerHTML = '<span style="font-family:\'Outfit\',sans-serif;font-size:12px;font-weight:800;color:#ff6b4a;text-transform:uppercase;letter-spacing:0.12em;text-shadow:0 0 12px rgba(255,107,74,0.3);text-align:center;line-height:1.4;">' + heroData[i].title + '</span>';
             node.appendChild(lbl);
 
             // Find the play button (the div with the triangle) and make it clickable
