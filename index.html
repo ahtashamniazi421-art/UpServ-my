@@ -221,6 +221,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -288,6 +289,127 @@
     <style>
         /* Global mobile overflow fix */
         html, body { overflow-x: hidden; max-width: 100vw; }
+
+        /* === DARK MODE OVERRIDES === */
+        html.dark body {
+            background: #111 !important;
+            color: #e5e5e5 !important;
+        }
+        html.dark nav {
+            background: rgba(17,17,17,0.95) !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        html.dark nav a, html.dark nav span, html.dark nav div {
+            color: #e5e5e5 !important;
+        }
+        html.dark nav a[href="#contact"] {
+            border-color: #e5e5e5 !important;
+        }
+        html.dark nav a[href="#contact"]:hover {
+            background: #e5e5e5 !important;
+            color: #111 !important;
+        }
+        /* Light sections become dark */
+        html.dark .bg-white,
+        html.dark .bg-brand-light {
+            background: #1a1a1a !important;
+            color: #e5e5e5 !important;
+        }
+        html.dark .bg-brand-lilac {
+            background: #2a1f3a !important;
+        }
+        html.dark .bg-brand-lilac\/30 {
+            background: rgba(42,31,58,0.3) !important;
+        }
+        html.dark .bg-brand-lilac\/40 {
+            background: rgba(42,31,58,0.4) !important;
+        }
+        /* Text color overrides */
+        html.dark .text-brand-dark {
+            color: #e5e5e5 !important;
+        }
+        html.dark .text-gray-400 {
+            color: #888 !important;
+        }
+        html.dark .text-gray-600 {
+            color: #aaa !important;
+        }
+        html.dark .text-gray-500 {
+            color: #999 !important;
+        }
+        html.dark .text-gray-300 {
+            color: #bbb !important;
+        }
+        /* Border overrides */
+        html.dark .border-brand-dark {
+            border-color: rgba(255,255,255,0.15) !important;
+        }
+        html.dark .border-gray-200 {
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        /* Portfolio cards in dark mode */
+        html.dark .portfolio-card.bg-white {
+            background: #1e1e1e !important;
+        }
+        html.dark .portfolio-card h3,
+        html.dark .portfolio-card p,
+        html.dark .portfolio-card span {
+            color: #e5e5e5 !important;
+        }
+        html.dark .portfolio-card svg {
+            color: #e5e5e5 !important;
+        }
+        html.dark .portfolio-card .border-brand-dark {
+            border-color: rgba(255,255,255,0.15) !important;
+        }
+        /* FAQ section */
+        html.dark .faq-stage-btn.bg-white {
+            background: #222 !important;
+            color: #e5e5e5 !important;
+        }
+        html.dark .faq-stage-btn.bg-brand-dark {
+            background: #ff6b4a !important;
+        }
+        /* Pricing cards */
+        html.dark #pricing .bg-white {
+            background: #1e1e1e !important;
+        }
+        html.dark #pricing .bg-brand-light {
+            background: #222 !important;
+        }
+        /* Shadow overrides */
+        html.dark [class*="shadow-[12px_12px_0px_0px_rgba(26,26,26"] {
+            --tw-shadow: 12px 12px 0px 0px rgba(255,107,74,0.4) !important;
+        }
+        /* Theme toggle button */
+        .theme-toggle {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid currentColor;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: transform 0.2s, background 0.2s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+        /* Hide sun/moon based on mode */
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        html.dark .theme-toggle .icon-sun { display: block; }
+        html.dark .theme-toggle .icon-moon { display: none; }
 
         /* Portfolio Horizontal Scroll */
         .portfolio-scroll-wrapper {
@@ -501,6 +623,10 @@
             </div>
             <div class="flex items-center gap-4 md:gap-8">
                 <div class="flex gap-3">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+                        <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+                    </button>
                     <a href="#contact" class="text-xs font-outfit font-bold border-2 border-brand-dark px-4 md:px-6 py-2 hover:bg-brand-dark hover:text-white transition-all uppercase tracking-widest hidden sm:block">Contact</a>
                     <a href="https://calendly.com/your-link" target="_blank" rel="noopener noreferrer" class="text-xs font-outfit font-bold border-2 border-brand-coral bg-brand-coral text-white px-3 md:px-6 py-2 hover:bg-brand-dark hover:border-brand-dark transition-all uppercase tracking-widest whitespace-nowrap">Book Demo</a>
                 </div>
@@ -2758,6 +2884,23 @@
         }
 
         go(0);
+    })();
+    </script>
+    <!-- Theme Toggle JS -->
+    <script>
+    (function() {
+        var toggle = document.getElementById('theme-toggle');
+        var html = document.documentElement;
+
+        // Restore saved preference
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+        }
+
+        toggle.addEventListener('click', function() {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
     })();
     </script>
 </body>
